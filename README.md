@@ -5,10 +5,12 @@ Projeto de software acadêmico para gestão eficiente de pátios e estacionament
 
 
 <p align="center">
-  <video src="https://github.com/user-attachments/assets/ce67baf0-fb43-4cad-99d7-676e260bb5f0" autoplay loop muted playsinline width="70%"></video>
+  <video src="https://github.com/user-attachments/assets/8f3478f4-4bd9-46da-bfa8-057e8bb9666c" autoplay loop muted playsinline width="70%"></video>
   <br>
   <em>Demonstração do sistema ParkEase em funcionamento</em>
 </p>
+
+
 
 
 
