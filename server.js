@@ -77,21 +77,55 @@ app.get('/estacionamento', (req, res) => {
 
 
 
-app.post('/estacionamento', (req, res) => {
-    // Os dados chegam aqui dentro de req.body
-    var {nome, empresa, veiculo, placa} = req.body;
-    
-   const regex = /^[a-zA-Z0-9]{7}$/;
+app.post('/estacionamento', (req, res) => { 
+   // Os dados chegam aqui dentro de req.body
+   var {nome, empresa, veiculo, placa} = req.body;
+
+   nome = nome.trim().replace(/\s+/g, ' ');
    
+
+   const regex  = /^[a-zA-Z0-9]{7}$/;
+   const regex2 = /^[A-Za-zÀ-ÿ ]{3,45}$/;
+   const regex3 = /^[A-Za-zÀ-ÿ ]{3,45}$/;
+   const regex4 = /^(carro|moto)$/;
+
+  if (!nome || !regex2.test(nome)) {
+    return res.status(400).json({
+        mensagem: "Nome: 3 a 30 letras, sem espaços duplos.",
+        campo: 'nome'
+    });
+  }
+
+  
+  if (!empresa || !regex3.test(empresa)) {
+    return res.status(400).json({
+        mensagem: "Empresa: 3 a 30 letras, sem espaços duplos.",
+        campo: 'empresa'
+    });
+  }
+   
+   
+  
+  if (!veiculo || !regex4.test(veiculo)) {
+    return res.status(400).json({
+        mensagem: "Veiculo: carro ou moto",
+        campo: 'veiculo'
+    });
+  }
+  
+
+
+    
     if (!placa || !regex.test(placa)) {
         return res.status(400).json({ 
-            mensagem: 'A placa deve ter 7 caracteres.',
+            mensagem: 'Placa: 7 Caracteres, sem espaços.',
             campo: 'placa'
-        
-
-         }); 
+         
+        }); 
     
      }
+
+
 
 
         
