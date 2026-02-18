@@ -1,10 +1,12 @@
 require('dotenv').config();
 
+
 var mysql = require('mysql2');
 const express = require('express');
 const cors = require('cors');
 
 const app = express();
+
 
 app.use(express.static('public')); 
 app.use(cors()); // Libera o acesso para o front-end
@@ -23,25 +25,6 @@ db.connect(function(err) {
          if (err) throw err;
         console.log('boa');
 });
-
-
-
-
-
-
-
-
-/*  app.get('/estacionamento', (req, res) => {
-    // Aqui você executa sua query SQL (Ex: SELECT * FROM parking)
-    // Supondo que 'resultados' seja o array vindo do banco:
-    db.query('SELECT * FROM parking', (err, resultados) => {
-        if (err) return res.status(500).send(err);
-        res.json(resultados); // Envia os dados para o navegador
-    });
-});*/
-
-
-
 
 
 
@@ -71,6 +54,30 @@ app.get('/estacionamento', (req, res) => {
         res.json(resultados);
     });
 });
+
+
+
+app.post('/deletar-registro', (req, res) => {
+    const idParaExcluir = req.body.id;
+    
+
+    const sql = "DELETE FROM `parking` WHERE `ID` = ?";
+
+    db.query(sql, [idParaExcluir], (err, result) => {
+        if (err) {
+            console.error("Erro SQL:", err.message);
+            return res.status(500).json({ erro: err.message });
+        }
+        
+       
+        res.status(200).json({ 
+            mensagem: "Excluído com sucesso!", 
+            afetados: result.affectedRows 
+        });
+    });
+});
+
+
 
 
 
@@ -146,16 +153,9 @@ app.post('/estacionamento', (req, res) => {
 
          
  
-
-
-
-     
-
     
 
 });
-
-
 
 
 

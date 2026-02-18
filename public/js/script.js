@@ -1,3 +1,57 @@
+// Se sua tabela for: <tbody id="tabela-resultados">
+const lista = document.querySelector('#corpo-tabela');
+
+lista.addEventListener('click', function(event) {
+    // Busca o botão mais próximo do clique que tenha a classe btn-danger
+    const botao = event.target.closest('.btn-danger');
+
+    // Se o clique foi em um botão de excluir...
+    if (botao) {
+        const idParaExcluir = botao.dataset.id;
+        console.log("ID capturado:", idParaExcluir);
+        
+       dell(idParaExcluir);
+    }
+});
+
+function dell(id) {
+    // Adicione o http://localhost:PORTA (verifique se sua porta é 3000)
+    fetch('http://localhost:3000/deletar-registro', { 
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: id })
+    })
+    .then(response => {
+        // Se cair aqui, o log vai nos dizer o número do erro (404, 500, etc)
+        if (!response.ok) {
+            console.error("Status do erro vindo do servidor:", response.status);
+            throw new Error('Erro na resposta do servidor');
+        }
+        return response.json();
+    })
+    .then(dados => {
+        console.log("Sucesso:", dados.mensagem);
+        document.querySelector(`button[data-id="${id}"]`).closest('tr').remove();
+    })
+    .catch(erro => console.error("Erro no processo:", erro));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 async function realizarBuscaGeral() {
     const termoBusca = document.getElementById('seuInputDeBusca').value;
     
@@ -12,17 +66,67 @@ async function realizarBuscaGeral() {
         dados.forEach(item => {
             tbody.innerHTML += `
                 <tr>
-                    <th scope="row">${item.ID}</th>
+                    <th scope="row" 
+                    style="text-align: center;" 
+                    >${item.ID}</th>
                     <td>${item.nome}</td>
                     <td>${item.empresa}</td>
                     <td>${item.veiculo}</td>
                     <td>${item.placa}</td>
+                    
+                    <td style="text-align: center;width: 0px;">
+                   
+                        <div style="padding: 0 15px;">
+                            
+                            <button data-id="${item.ID}" 
+                            type= "button" 
+                            class="btn btn-danger 
+                            d-flex align-items-center gap-1">
+                            <img src="assets/icons/trash.svg" 
+                            width="12" 
+                            height="16" 
+                            style="filter: invert(1);"> 
+                            </button>
+                        
+                        </div>
+                    
+                    </td>
+
+                   <td style="text-align: center;width: 0px;">
+                    
+                        <div style="padding: 0 15px;">
+                            
+                            <button type="button" 
+                            class="btn btn-primary 
+                            d-flex align-items-center gap-1">
+                            <img src="assets/icons/pencil-square.svg" 
+                            width="12" 
+                            height="16" 
+                            style="filter: invert(1);"> 
+                            </button>
+                        
+                        </div>
+                        
+                        </td>
+
                 </tr>`;
+                    
+                    
+                    
+    
         });
     } catch (error) {
         console.error('Erro na busca:', error);
     }
 }
+
+
+
+
+
+
+
+
 
 
 async function gravarDados(event) {
