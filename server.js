@@ -57,6 +57,23 @@ app.get('/estacionamento', (req, res) => {
 
 
 
+
+app.get('/select', (req, res) => {
+    
+    const termo = req.query.busca;
+    
+    let sql = 'SELECT * FROM parking WHERE ID = ?';
+
+   
+
+    db.query(sql, termo, (err, resultados) => {
+        if (err) return res.status(500).json(err);
+        res.json(resultados);
+    });
+});
+
+
+
 app.post('/deletar-registro', (req, res) => {
     const idParaExcluir = req.body.id;
     
@@ -77,6 +94,76 @@ app.post('/deletar-registro', (req, res) => {
     });
 });
 
+
+
+
+app.post('/update', (req, res) => { 
+   // Os dados chegam aqui dentro de req.body
+   var {id, nome, empresa, veiculo, placa} = req.body;
+
+   nome = nome.trim().replace(/\s+/g, ' ');
+   
+
+   const regex  = /^[a-zA-Z0-9]{7}$/;
+   const regex2 = /^[A-Za-zÀ-ÿ ]{3,45}$/;
+   const regex3 = /^[A-Za-zÀ-ÿ ]{3,45}$/;
+   const regex4 = /^(carro|moto)$/;
+
+  if (!nome || !regex2.test(nome)) {
+    return res.status(400).json({
+        mensagem: "Nome: 3 a 30 letras, sem espaços duplos.",
+        campo: 'nome'
+    });
+  }
+
+  
+  if (!empresa || !regex3.test(empresa)) {
+    return res.status(400).json({
+        mensagem: "Empresa: 3 a 30 letras, sem espaços duplos.",
+        campo: 'empresa'
+    });
+  }
+   
+   
+  
+  if (!veiculo || !regex4.test(veiculo)) {
+    return res.status(400).json({
+        mensagem: "Veiculo: carro ou moto",
+        campo: 'veiculo'
+    });
+  }
+  
+
+
+    
+    if (!placa || !regex.test(placa)) {
+        return res.status(400).json({ 
+            mensagem: 'Placa: 7 Caracteres, sem espaços.',
+            campo: 'placa'
+         
+        }); 
+    
+     }
+
+
+
+
+        
+     
+        const sql = "update parking set nome = ?,empresa = ?,veiculo = ?,placa = ? WHERE ID = ?";
+
+        const valores =[nome, empresa, veiculo, placa, id];
+
+        db.query(sql, valores, (err, result) => {
+        if (err) return res.status(500).send(err);
+        res.status(200).json({
+             mensagem: "Gravado com sucesso!",
+             id: result.insertId 
+        });
+    });
+   
+
+});
 
 
 

@@ -11,9 +11,51 @@
 <body>
     
 
+
+  <div class="collapse" id="collapseExample2">
   
+    <div  id="formofreg1" class="container-lg bg-dark text-white border-1 rounded-3 d-flex mt-2" style="height: 250px; justify-content: center;padding-left: 100px;padding-top: 20px;">
+    <form onsubmit="atualizarDados(event)" id="meuform" class="row g-3 " style="height: 0px;">
+  
+  
+  <div class="col-5">
+    <label for="nome2" class="form-label">Nome</label>
+    <input name="nome2" minlength="3" maxlength="45" type="text" class="form-control" id="nome2" placeholder="Nome (3-45 letras, espaço único)" required>
+  </div>
+ 
+  <div class="col-md-5">
+    <label for="empresa2" class="form-label">Empresa</label>
+    <input name="empresa2" maxlength="45" type="text" class="form-control" id="empresa2" placeholder="Empresa (3-45 letras, espaço único)" required>
+  </div>
+
+  <div class="col-5">
+    <label for="placa2" class="form-label">Placa</label>
+    <input name="placa2" maxlength="7" type="text" class="form-control" id="placa2">
+  </div>
+  
+  <div class="col-md-5">
+    <label for="veiculo2" class="form-label">Veiculo</label>
+    <select id="veiculo2" class="form-select" required >
+      <option value="" selected >Seleção...</option>
+      <option value="carro">Carro</option>
+      <option value="moto" >Moto</option>
+    </select>
+  </div>
+ 
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-success mt-2">Editar</button>
+  </div>
+</form>
+  </div>
+  </div>
+</div>
 
 
+
+
+  
+  
   <div class="collapse" id="collapseExample">
   
     <div  id="formofreg1" class="container-lg bg-dark text-white border-1 rounded-3 d-flex mt-2" style="height: 250px; justify-content: center;padding-left: 100px;padding-top: 20px;">
