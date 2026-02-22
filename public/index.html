@@ -15,7 +15,7 @@
   <div class="collapse" id="collapseExample2">
   
     <div  id="formofreg1" class="container-lg bg-dark text-white border-1 rounded-3 d-flex mt-2" style="height: 250px; justify-content: center;padding-left: 100px;padding-top: 20px;">
-    <form onsubmit="atualizarDados(event)" id="meuform" class="row g-3 " style="height: 0px;">
+    <form id="meuFormulario2" class="row g-3 " style="height: 0px;">
   
   
   <div class="col-5">
@@ -25,12 +25,12 @@
  
   <div class="col-md-5">
     <label for="empresa2" class="form-label">Empresa</label>
-    <input name="empresa2" maxlength="45" type="text" class="form-control" id="empresa2" placeholder="Empresa (3-45 letras, espaço único)" required>
+    <input name="empresa2" minlength="3" maxlength="45" type="text" class="form-control" id="empresa2" placeholder="Empresa (3-45 letras, espaço único)" required>
   </div>
 
   <div class="col-5">
     <label for="placa2" class="form-label">Placa</label>
-    <input name="placa2" maxlength="7" type="text" class="form-control" id="placa2">
+    <input name="placa2" minlength="7" maxlength="7" type="text" class="form-control" id="placa2" required>
   </div>
   
   <div class="col-md-5">
@@ -59,7 +59,7 @@
   <div class="collapse" id="collapseExample">
   
     <div  id="formofreg1" class="container-lg bg-dark text-white border-1 rounded-3 d-flex mt-2" style="height: 250px; justify-content: center;padding-left: 100px;padding-top: 20px;">
-    <form onsubmit="gravarDados(event)" id="meuform" class="row g-3 " style="height: 0px;">
+    <form id="meuFormulario" class="row g-3 " style="height: 0px;">
   
   
   <div class="col-5">
@@ -69,12 +69,12 @@
  
   <div class="col-md-5">
     <label for="empresa" class="form-label">Empresa</label>
-    <input name="empresa" maxlength="45" type="text" class="form-control" id="empresa" placeholder="Empresa (3-45 letras, espaço único)" required>
+    <input name="empresa" minlength="3" maxlength="45" type="text" class="form-control" id="empresa" placeholder="Empresa (3-45 letras, espaço único)" required>
   </div>
 
   <div class="col-5">
     <label for="placa" class="form-label">Placa</label>
-    <input name="placa" maxlength="7" type="text" class="form-control" id="placa">
+    <input name="placa" minlength="7" maxlength="7" type="text" class="form-control" id="placa" required>
   </div>
   
   <div class="col-md-5">
@@ -88,7 +88,7 @@
  
 
   <div class="col-12">
-    <button type="submit" class="btn btn-success mt-2">Cadastrar</button>
+    <button id="register" type="submit" class="btn btn-success mt-2">Cadastrar</button>
   </div>
 </form>
   </div>
@@ -103,7 +103,7 @@
 
 
 
-  <button id="vixi" class="btn btn-primary" style="width: 150px; height: 40px;"  type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample">
+  <button id="Cadastro" class="btn btn-primary" style="width: 150px; height: 40px;"  type="button">
     <img src="assets/icons/plus-lg.svg" width="16" height="15" style="filter: invert(1);">Cadastro
   </button>
 
@@ -118,7 +118,7 @@
                id="seuInputDeBusca">
         
         <!-- O Botão Acoplado -->
-        <button onclick="realizarBuscaGeral()" class="btn btn-primary" type="button" id="btnBuscar">
+        <button  class="btn btn-primary" type="button" id="btnBuscar">
             <img src="assets/icons/search.svg" width="16" height="16" style="filter: invert(1);"> Pesquisar
         </button>
     </div>
